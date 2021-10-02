@@ -1,0 +1,82 @@
+/* Palette */
+:root {
+  --primary-color: #f5cb5c;
+  --secondary-color: #14213d;
+  --dark-primary: #242423;
+  --dark-secondary: #333533;
+  --light-primary: #e8eddf;
+  --light-secondary: #cfdbd5;
+}
+
+/* Global */
+body {
+  background-color: var(--light-primary);
+}
+
+a {
+  text-decoration: none;
+  color: var(--dark-secondary);
+}
+
+.outlevel-container {
+  max-width: 900px;
+  margin: auto;
+  padding: 15px;
+}
+
+.flex-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.accentuate {
+  color: var(--primary-color);
+  text-transform: uppercase;
+  font-weight: bold;
+  text-shadow: #333533 1px 0 10px;
+}
+
+/* Header */
+header {
+  background: var(--light-secondary);
+  width: 100%;
+  position: sticky;
+}
+
+.logo {
+  color: var(--dark-secondary);
+  font-size: 2rem;
+  text-transform: capitalize;
+  text-decoration: none;
+}
+
+.extended-menu {
+  display: none;
+}
+
+.extended-menu a {
+  flex: auto;
+  border-radius: 15%;
+  padding: 10px;
+  margin: 10px;
+  text-decoration: none;
+  color: var(--dark-secondary);
+  border: solid 2px var(--primary-color);
+}
+
+.extended-menu a:hover {
+  color: var(--primary-color);
+  text-shadow: #333533 1px 0 10px;
+}
+
+/* MediaQueries */
+@media screen and (min-width: 768px) {
+  .extended-menu {
+    display: flex;
+  }
+
+  .sandwich-menu {
+    display: none;
+  }
+}
