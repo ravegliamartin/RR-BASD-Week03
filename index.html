@@ -9,7 +9,6 @@
         <link rel="stylesheet" href="css/reset.css">
         <link rel="stylesheet" href="css/style.css">
         <link href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined" rel="stylesheet">
-
     </head>
 
     <body>
@@ -34,24 +33,117 @@
                     </a>
                 </nav>
             </div>
+            <section class="welcome-date">
+                <h1>News that matter</h1>
+                <time>
+                    <script>
+                        document.write(new Date().toLocaleDateString());
+                    </script>
+                </time>
+            </section>
         </header>
-        <main class="flex-container">
-            <section class="main-article">
-
+        <main class="flex-container flex-wrap">
+            <section class="secondary-articles flex-container flex-wrap">
+                <article class="secondary-article">
+                    <a href="#">
+                        <h3 class="secondary-section">Sport</h3>
+                        <h2>Titulo</h2>
+                        <p>
+                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus optio rem eum
+                            ipsum nostrum eligendi sequi sit quaerat iusto repellendus.
+                        </p>
+                    </a>
+                </article>
+                <article class="secondary-article">
+                    <a href="#">
+                        <h3 class="secondary-section">Culture</h3>
+                        <h2>Titulo</h2>
+                        <p>
+                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus optio rem
+                            eum
+                            ipsum nostrum eligendi sequi sit quaerat iusto repellendus.
+                        </p>
+                    </a>
+                </article>
+                <article class="secondary-article">
+                    <a href="#">
+                        <h3 class="secondary-section">Weather</h3>
+                        <h2>Titulo</h2>
+                        <p>
+                            Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                            Doloribus optio rem eum
+                            ipsum nostrum eligendi sequi sit quaerat iusto repellendus.
+                        </p>
+                    </a>
+                </article>
+                <article class="secondary-article">
+                    <a href="#">
+                        <h3 class="secondary-section">Economy</h3>
+                        <h2>Titulo</h2>
+                        <p>
+                            Lorem ipsum dolor sit amet consectetur
+                            adipisicing elit. Doloribus optio rem eum
+                            ipsum nostrum eligendi sequi sit quaerat
+                            iusto repellendus.
+                        </p>
+                    </a>
+                </article>
             </section>
-            <section class="secondary-articles">
-
+            <section class="main-articles flex-container flex-wrap">
+                <article class="main-article">
+                    <a href="#">
+                        <figure>
+                            <img src="./img/img01.jpg" alt="" srcset="">
+                            <figcaption>
+                                <h2>Titulo</h2>
+                                <p>
+                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus optio rem eum
+                                    ipsum nostrum eligendi sequi sit quaerat iusto repellendus.
+                                </p>
+                            </figcaption>
+                        </figure>
+                    </a>
+                </article>
+                <article class="main-article">
+                    <a href="#">
+                        <figure>
+                            <img src="./img/img02.jpg" alt="" srcset="">
+                            <figcaption>
+                                <h2>Titulo</h2>
+                                <p>
+                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus optio rem eum
+                                    ipsum nostrum eligendi sequi sit quaerat iusto repellendus.
+                                </p>
+                            </figcaption>
+                        </figure>
+                    </a>
+                </article>
             </section>
-            <section class="advertisemnt">
-
+            <section class="advertisement">
+                <a href="#">
+                    <figure>
+                        <img src="./img/advertisement.jpg" alt="" srcset="">
+                        <figcaption>
+                            <h3>Advertisement</h3>
+                        </figcaption>
+                    </figure>
+                </a>
             </section>
         </main>
-        <footer>
-            <li class="footer-sections">
-
-            </li>
+        <footer class="flex-container flex-wrap">
+            <a href="#" class="logo">
+                <span class="accentuate">Rave</span> News
+            </a>
+            <ul>
+                <a href="#" class="footer-section">Home</a>
+                <a href="#" class="footer-section">Sport</a>
+                <a href="#" class="footer-section">Culture</a>
+                <a href="#" class="footer-section">Weather</a>
+                <a href="#" class="footer-section">Economy</a>
+                <a href="#" class="footer-section">Log In</a>
+            </ul>
             <h3 class="footer-rights">
-
+                &copy; <span class="accentuate">Rave</span> News | 2021
             </h3>
         </footer>
     </body>
