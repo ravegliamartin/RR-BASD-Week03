@@ -1,0 +1,53 @@
+/* Palette */
+:root {
+  --primary-color: #f5cb5c;
+  --secondary-color: #14213d;
+  --dark-primary: #242423;
+  --dark-secondary: #333533;
+  --light-primary: #e8eddf;
+  --light-secondary: #cfdbd5;
+}
+
+body {
+  background-color: var(--light-primary);
+  overflow-x: hidden;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+a {
+  text-decoration: none;
+  color: var(--dark-secondary);
+}
+
+h2 {
+  font-size: 1.5rem;
+  font-weight: 500;
+  margin-bottom: 5px;
+}
+
+.outlevel-container {
+  max-width: 1024px;
+  margin: auto;
+  padding: 15px;
+}
+
+.flex-container {
+  display: flex;
+  justify-content: space-between;
+
+}
+
+.flex-wrap {
+  flex-wrap: wrap;
+}
+
+.accentuate {
+  color: var(--primary-color);
+  text-transform: uppercase;
+  font-weight: bold;
+  text-shadow: #333533 1px 0 10px;
+}
+
+.selected {
+  background-color: var(--primary-color);
+}

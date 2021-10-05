@@ -1,0 +1,10 @@
+/* MediaQueries */
+@media screen and (min-width: 768px) {
+  .extended-menu {
+    display: flex;
+  }
+
+  .sandwich-menu {
+    display: none;
+  }
+}

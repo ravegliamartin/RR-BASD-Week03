@@ -1,0 +1,33 @@
+/* Header */
+header {
+  background: var(--light-secondary);
+  width: 100%;
+  position: sticky;
+  align-items: center;
+}
+
+.logo {
+  color: var(--dark-secondary);
+  font-size: 2rem;
+  text-transform: capitalize;
+  text-decoration: none;
+}
+
+.extended-menu {
+  display: none;
+}
+
+.extended-menu a {
+  flex: auto;
+  border-radius: 15%;
+  padding: 10px;
+  margin: 0 10px;
+  text-decoration: none;
+  color: var(--dark-secondary);
+  border: solid 2px var(--primary-color);
+}
+
+.extended-menu a:hover {
+  color: var(--primary-color);
+  text-shadow: #333533 1px 0 10px;
+}
