@@ -1,5 +1,5 @@
 /* Main */
-main {
+main.flex-container {
   justify-content: center;
 }
 
@@ -37,6 +37,7 @@ main {
   padding: 10px;
   margin: 10px;
   border: solid 2px #333533;
+  border-radius: 10px;
   background-color: var(--light-secondary);
 }
 
@@ -54,6 +55,7 @@ main {
   padding: 10px;
   margin: 10px;
   border: solid 2px #333533;
+  border-radius: 10px;
   background-color: var(--light-secondary);
 }
 
@@ -68,10 +70,11 @@ main {
 .advertisement {
   align-self: flex-start;
   padding: 10px;
-  margin: 10px auto;
+  margin: 10px;
   flex: 1 2 200px;
   max-width: fit-content;
   border: solid 2px red;
+  border-radius: 10px;
   background-color: var(--light-secondary);
 }
 
