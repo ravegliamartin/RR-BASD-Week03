@@ -10,6 +10,7 @@ main.flex-container {
   flex-wrap: wrap;
   width: 100%;
   padding: 10px;
+  border-top: solid 2px var(--primary-color);
 }
 
 .welcome-date h1 {
@@ -31,6 +32,17 @@ main.flex-container {
 .main-articles {
   flex-direction: column;
   flex: 3 1 400px;
+  margin: 10px;
+  border: solid 2px var(--primary-color);
+  border-radius: 10px;
+  background-color: #cfdbd555;
+}
+
+.main-articles>h2,
+.secondary-articles>h2 {
+  padding: 10px;
+  margin: 10px;
+  border-bottom: solid 1px var(--primary-color);
 }
 
 .main-article {
@@ -47,8 +59,12 @@ main.flex-container {
 
 .secondary-articles {
   flex-direction: column;
-  flex: 2 1 300px;
+  flex: 2 2 300px;
   justify-content: space-between;
+  margin: 10px;
+  border: solid 2px var(--primary-color);
+  border-radius: 10px;
+  background-color: #cfdbd555;
 }
 
 .secondary-article {
@@ -71,7 +87,7 @@ main.flex-container {
   align-self: flex-start;
   padding: 10px;
   margin: 10px;
-  flex: 1 2 200px;
+  flex: 1 3 200px;
   max-width: fit-content;
   border: solid 2px red;
   border-radius: 10px;

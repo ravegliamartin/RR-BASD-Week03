@@ -6,15 +6,23 @@ header {
   align-items: center;
 }
 
+header>div {
+  align-items: center;
+}
+
 .logo {
+  flex: 0 0 250px;
   color: var(--dark-secondary);
-  font-size: 2rem;
+  font-size: 1.9rem;
   text-transform: capitalize;
   text-decoration: none;
 }
 
 .extended-menu {
   display: none;
+  flex-wrap: wrap;
+  height: 40px;
+  overflow: hidden;
 }
 
 .extended-menu a {
