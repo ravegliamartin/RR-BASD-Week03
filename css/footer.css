@@ -27,6 +27,11 @@ footer {
   border: solid 2px var(--primary-color);
 }
 
+footer a {
+  transition: text-shadow 150ms ease,
+    color 150ms ease;
+}
+
 footer a:hover {
   color: var(--primary-color);
   text-shadow: #333533 1px 0 10px;

@@ -33,6 +33,8 @@ header>div {
   text-decoration: none;
   color: var(--dark-secondary);
   border: solid 2px var(--primary-color);
+  transition: text-shadow 150ms ease,
+    color 150ms ease;
 }
 
 .extended-menu a:hover {
