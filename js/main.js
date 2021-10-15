@@ -85,6 +85,7 @@ const main = () => {
     let allValidationsOk = true
     let alertString = ''
     allMsg.forEach(el => {
+      el.previousElementSibling.children[1].dispatchEvent(new Event('blur'))
       const label = el.previousElementSibling.children[0].textContent
       const input = el.previousElementSibling.children[1].value
       alertString += `${label} ${input}${el.textContent === 'Correct Input' ?'':` | ${el.textContent}`}\n`
