@@ -77,8 +77,25 @@ input:hover {
 
 .msg {
   padding: 2px;
+  padding-top: 1px;
   height: 15px;
   line-height: 1rem;
   text-align: right;
   font: 0.7rem sans-serif;
+}
+
+.warning {
+  color: red;
+}
+
+.warning-border {
+  border: 1px solid red;
+}
+
+.succeed {
+  color: green;
+}
+
+.succeed-border {
+  border: 1px solid green;
 }
