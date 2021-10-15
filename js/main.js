@@ -27,12 +27,6 @@ const main = () => {
   const cityValidator = (cityContent) => cityContent.length > 2
   const zipValidator = (zipContent) => zipContent.length > 2
   const idValidator = (IDContent) => IDContent.length === 7 || IDContent.length === 8 && numericRegEx.test(IDContent)
-  const validateAll = () => fullNameValidator(fullName.value) && mailValidator(mail.value) &&
-    passValidator(pass.value) && repeatPassValidator(repeatPass.value) && ageValidator(age.value) &&
-    phoneValidator(phone.value) && addressValidator(address.value) && cityValidator(city.value) &&
-    zipValidator(zip.value) && idValidator(id.value)
-
-
 
   // ############ Elements Manipulation ############
 
@@ -88,12 +82,19 @@ const main = () => {
   // Submit Event Listener
   submit.addEventListener('click', (e) => {
     e.preventDefault()
+    let allValidationsOk = true
     let alertString = ''
     allMsg.forEach(el => {
       const label = el.previousElementSibling.children[0].textContent
       const input = el.previousElementSibling.children[1].value
       alertString += `${label} ${input}${el.textContent === 'Correct Input' ?'':` | ${el.textContent}`}\n`
+      allValidationsOk = allValidationsOk && el.textContent === 'Correct Input'
     })
+    if (allValidationsOk) {
+      alertString += '\nValidation Succesful!'
+    } else {
+      alertString += '\nValidation Unsuccesful!'
+    }
     alert(alertString)
   })
 
