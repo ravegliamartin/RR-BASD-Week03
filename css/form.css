@@ -74,3 +74,11 @@ input {
 input:hover {
   border-color: var(--primary-color);
 }
+
+.msg {
+  padding: 2px;
+  height: 15px;
+  line-height: 1rem;
+  text-align: right;
+  font: 0.7rem sans-serif;
+}

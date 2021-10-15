@@ -54,48 +54,76 @@
         <h2 class="form-title accentuate">hola</h2>
         <div class="form-fields-container">
           <ul class="form-group">
-            <li>
-              <label for="fname">Full name:</label>
-              <input type="text" id="fname" name="fname" placeholder="Juan Perez">
-            </li>
+            <div class="field-container">
+              <li>
+                <label for="fname">Full name:</label>
+                <input type="text" id="fname" name="fname" placeholder="Juan Perez">
+              </li>
+              <div id="fname-msg" class="msg"></div>
+            </div>
             <li>
               <label for="mail">E-mail:</label>
               <input type="email" id="mail" name="user_email" placeholder="your@email.com">
             </li>
+            <div class="field-container">
+              <div id="mail-msg" class="msg"></div>
+            </div>
             <li>
               <label for="pass">Password:</label>
               <input type="password" id="pass" name="user_pass">
             </li>
+            <div class="field-container">
+              <div id="pass-msg" class="msg"></div>
+            </div>
             <li>
               <label for="repeat-pass">Repeat Password:</label>
               <input type="password" id="repeat-pass" name="user_pass2">
             </li>
+            <!-- <div id="repeat-pass-msg" class="msg"></div> -->
             <li>
               <label for="age">Age:</label>
               <input type="text" id="age" name="user_age">
             </li>
+            <div class="field-container">
+              <div id="age-msg" class="msg"></div>
+            </div>
           </ul>
           <ul class="form-group">
             <li>
               <label for="phone">Phone Number:</label>
               <input type="text" id="phone" name="user_phone" placeholder="123456789">
             </li>
+            <div class="field-container">
+              <div id="phone-msg" class="msg"></div>
+            </div>
             <li>
               <label for="address">Address:</label>
               <input type="text" id="address" name="user_address" placeholder="Address 123">
             </li>
+            <div class="field-container">
+              <div id="address-msg" class="msg"></div>
+            </div>
             <li>
               <label for="city">City:</label>
               <input type="text" id="city" name="user_city" placeholder="Rosario">
             </li>
+            <div class="field-container">
+              <div id="city-msg" class="msg"></div>
+            </div>
             <li>
               <label for="zip">Zip Code:</label>
               <input type="text" id="zip" name="user_zip" placeholder="2000">
             </li>
+            <div class="field-container">
+              <div id="zip-msg" class="msg"></div>
+            </div>
             <li>
               <label for="id">ID:</label>
               <input type="text" id="id" name="user_id" placeholder="123456789">
             </li>
+            <div class="field-container">
+              <div id="id-msg" class="msg"></div>
+            </div>
           </ul>
         </div>
         <input type="submit" value="Enviar">
