@@ -9,13 +9,15 @@ const address = document.querySelector('#address')
 const city = document.querySelector('#city')
 const zip = document.querySelector('#zip')
 const id = document.querySelector('#id')
+const submit = document.querySelector('#submit-btn')
+const allMsg = document.querySelectorAll('.msg')
 
 const alphanumericRegEx = /^[a-z0-9]+$/i
 const numericRegEx = /^\d+$/
 const mailRegEx = /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/
 
 // Validations
-const fullNameValidator = (fullNameContent) => /^[a-z]+ [a-z]+$/i.test(fullNameContent) && fullNameContent.length > 7
+const fullNameValidator = (fullNameContent) => /^[a-z]+( +[a-z]+)+$/i.test(fullNameContent) && fullNameContent.length > 6
 const mailValidator = (mailContent) => mailRegEx.test(mailContent)
 const passValidator = (passContent) => alphanumericRegEx.test(passContent) && passContent.length > 7
 const repeatPassValidator = (repeatPassContent) => pass.value === repeatPassContent
@@ -25,6 +27,12 @@ const addressValidator = (addressContent) => /^[a-z0-9]+ [a-z0-9]+$/i.test(addre
 const cityValidator = (cityContent) => cityContent.length > 2
 const zipValidator = (zipContent) => zipContent.length > 2
 const idValidator = (IDContent) => IDContent.length === 7 || IDContent.length === 8 && numericRegEx.test(IDContent)
+const validateAll = () => fullNameValidator(fullName.value) && mailValidator(mail.value) &&
+  passValidator(pass.value) && repeatPassValidator(repeatPass.value) && ageValidator(age.value) &&
+  phoneValidator(phone.value) && addressValidator(address.value) && cityValidator(city.value) &&
+  zipValidator(zip.value) && idValidator(id.value)
+
+
 
 // ############ Elements Manipulation ############
 
@@ -55,7 +63,7 @@ fullName.addEventListener('blur', (e) => elBlurManipulation(e, fullNameValidator
 mail.addEventListener('blur', (e) => elBlurManipulation(e, mailValidator, 'Should be a valid email address'))
 pass.addEventListener('blur', (e) => elBlurManipulation(e, passValidator, 'At least 8 alphanumeric characters'))
 repeatPass.addEventListener('blur', (e) => elBlurManipulation(e, repeatPassValidator, 'Shoul be the same as password'))
-age.addEventListener('blur', (e) => elBlurManipulation(e, ageValidator, 'Shoul be over 18'))
+age.addEventListener('blur', (e) => elBlurManipulation(e, ageValidator, 'Should be over 18'))
 phone.addEventListener('blur', (e) => elBlurManipulation(e, phoneValidator, 'At least 7 digits'))
 address.addEventListener('blur', (e) => elBlurManipulation(e, addressValidator, 'At least 5 letters and space in between'))
 city.addEventListener('blur', (e) => elBlurManipulation(e, cityValidator, 'At least 3 letters'))
@@ -74,7 +82,22 @@ city.addEventListener('focus', (e) => elFocusManipulation(e))
 zip.addEventListener('focus', (e) => elFocusManipulation(e))
 id.addEventListener('focus', (e) => elFocusManipulation(e))
 
+// Submit Event Listener
+submit.addEventListener('click', (e) => {
+  e.preventDefault()
+  let alertString = ''
+  allMsg.forEach(el => {
+    const label = el.previousElementSibling.children[0].textContent
+    const input = el.previousElementSibling.children[1].value
+    alertString += `${label} ${input}${el.textContent === 'Correct Input' ?'':` | ${el.textContent}`}\n`
+  })
+  alert(alertString)
+})
+
 // ############ BONUS ############
+const formTitle = document.querySelector('form h2.form-title')
+fullName.addEventListener('keyup', () => formTitle.textContent = `Hola ${fullName.value}`)
+fullName.addEventListener('focus', () => formTitle.textContent = `Hola ${fullName.value}`)
 // }
 
 // window.addEventListener('load', main)
