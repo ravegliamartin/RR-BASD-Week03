@@ -68,16 +68,16 @@ const main = () => {
   id.addEventListener('blur', (e) => elBlurManipulation(e, idValidator, '7 or 8 digits'))
 
   // Focus Event Listeners
-  fullName.addEventListener('focus', (e) => elFocusManipulation(e))
-  mail.addEventListener('focus', (e) => elFocusManipulation(e))
-  pass.addEventListener('focus', (e) => elFocusManipulation(e))
-  repeatPass.addEventListener('focus', (e) => elFocusManipulation(e))
-  age.addEventListener('focus', (e) => elFocusManipulation(e))
-  phone.addEventListener('focus', (e) => elFocusManipulation(e))
-  address.addEventListener('focus', (e) => elFocusManipulation(e))
-  city.addEventListener('focus', (e) => elFocusManipulation(e))
-  zip.addEventListener('focus', (e) => elFocusManipulation(e))
-  id.addEventListener('focus', (e) => elFocusManipulation(e))
+  fullName.addEventListener('focus', elFocusManipulation)
+  mail.addEventListener('focus', elFocusManipulation)
+  pass.addEventListener('focus', elFocusManipulation)
+  repeatPass.addEventListener('focus', elFocusManipulation)
+  age.addEventListener('focus', elFocusManipulation)
+  phone.addEventListener('focus', elFocusManipulation)
+  address.addEventListener('focus', elFocusManipulation)
+  city.addEventListener('focus', elFocusManipulation)
+  zip.addEventListener('focus', elFocusManipulation)
+  id.addEventListener('focus', elFocusManipulation)
 
   // Submit Event Listener
   submit.addEventListener('click', (e) => {
@@ -101,7 +101,7 @@ const main = () => {
 
   // ############ BONUS ############
   const formTitle = document.querySelector('form h2.form-title')
-  fullName.addEventListener('keydown', (e) => setTimeout(() => formTitle.textContent = `Hola ${fullName.value}`, 0))
+  fullName.addEventListener('keydown', () => setTimeout(() => formTitle.textContent = `Hola ${fullName.value}`, 0))
   fullName.addEventListener('focus', () => formTitle.textContent = `Hola ${fullName.value}`)
 }
 
