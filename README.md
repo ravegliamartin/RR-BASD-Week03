@@ -12,3 +12,15 @@
 
 ### Week03
 [https://github.com/ravegliamartin/RR-BASD-Week03/blob/main/index.html](https://github.com/ravegliamartin/RR-BASD-Week03/blob/main/index.html)
+
+---
+
+_To navigate between the form page (Week05) and the news site homepage (Week03), you should use the first two buttons on the navbar. 
+* Form (Goes to Week05 site)
+* Home (Goes to Week03 site)
+
+---
+
+## Author 🖋️
+
+Martín Raveglia
