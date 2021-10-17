@@ -15,9 +15,9 @@
 
 ---
 
-_To navigate between the form page (Week05) and the news site homepage (Week03), you should use the first two buttons on the navbar. 
-* Form (Goes to Week05 site)
-* Home (Goes to Week03 site)
+_To navigate between the form page (Week05) and the news site homepage (Week03), you should use the first two buttons on the navbar._
+* _Form (Goes to Week05 site)_
+* _Home (Goes to Week03 site)_
 
 ---
 
