@@ -25,13 +25,13 @@ const numericRegEx = /^\d+$/
 const mailRegEx = /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/
 
 // Validations
-const fullNameValidator = (fullNameContent) => /^[a-z]+( +[a-z]+)+$/i.test(fullNameContent) && fullNameContent.length > 6
+const fullNameValidator = (fullNameContent) => /^[a-záéíóúñ]+( +[a-záéíóúñ]+)+$/i.test(fullNameContent) && fullNameContent.length > 6
 const mailValidator = (mailContent) => mailRegEx.test(mailContent)
 const passValidator = (passContent) => alphanumericRegEx.test(passContent) && passContent.length > 7
 const repeatPassValidator = (repeatPassContent) => pass.value === repeatPassContent
 const ageValidator = (ageContent) => numericRegEx.test(ageContent) && Number(ageContent) > 17
 const phoneValidator = (phoneContent) => numericRegEx.test(phoneContent) && phoneContent.length > 6
-const addressValidator = (addressContent) => /^[a-z0-9]+ [a-z0-9]+$/i.test(addressContent) && /\d/.test(addressContent) && /[a-z]/i.test(addressContent) && addressContent.length > 4
+const addressValidator = (addressContent) => /^[a-z0-9áéíóúñ]+ [a-z0-9áéíóúñ]+$/i.test(addressContent) && /\d/.test(addressContent) && /[a-z]/i.test(addressContent) && addressContent.length > 4
 const cityValidator = (cityContent) => cityContent.length > 2
 const zipValidator = (zipContent) => zipContent.length > 2
 const idValidator = (IDContent) => IDContent.length === 7 || IDContent.length === 8 && numericRegEx.test(IDContent)
@@ -91,22 +91,22 @@ id.addEventListener('focus', elFocusManipulation)
 submit.addEventListener('click', (e) => {
   e.preventDefault()
   let allValidationsOk = true
-  let alertString = ''
+  // let alertString = ''
   let obj = {}
   allMsg.forEach(el => {
     el.previousElementSibling.children[1].dispatchEvent(new Event('blur'))
-    const label = el.previousElementSibling.children[0].textContent
+    const label = el.previousElementSibling.children[0].textContent.replace(':', '')
     const input = el.previousElementSibling.children[1].value
     // alertString += `${label} ${input}${el.textContent === 'Correct Input' ?'':` | ${el.textContent}`}\n`
-    obj[label.replace(':', '')] = `${input}${el.textContent === 'Correct Input' ?'':` | ${el.textContent}`}`
+    obj[label] = `${input}${el.textContent === 'Correct Input' ?'':` | ${el.textContent}`}`
     allValidationsOk = allValidationsOk && el.textContent === 'Correct Input'
   })
   if (allValidationsOk) {
-    alertString += '\nValidation Succesful!'
+    // alertString += '\nValidation Succesful!'
     fieldValueKeysGenerator()
     getForm(fieldValueKeys)
   } else {
-    alertString += '\nValidation Unsuccesful!'
+    // alertString += '\nValidation Unsuccesful!'
     liGenerator(obj, modalContent)
     modalUnsuccessStyle('JS Validation Unsuccessful!')
     modal.showModal()
@@ -148,6 +148,7 @@ const getForm = async (keysObj) => {
     liGenerator(data, modalContent)
     modalSuccessStyle('Suscription Successful!')
     modal.showModal()
+    toLocalStorage(data)
   } catch (err) {
     liGenerator(err.toString(), modalContent)
     modalUnsuccessStyle('Suscription Unsuccessful!')
@@ -195,3 +196,29 @@ const modalUnsuccessStyle = (labelContent) => {
   modal.classList.add('warning-border')
   modal.classList.remove('succeed-border')
 }
+
+
+// ############ LocalStorage Manipulation ############
+const fieldValueKeysRetrievedMethod = {
+  name: (value) => fullName.value = value,
+  email: (value) => mail.value = value,
+  // fullName: (value)=> fullName.value=value,
+  // mail: (value)=> mail.value=value,
+  pass: (value) => pass.value = value,
+  repeatPass: (value) => repeatPass.value = value,
+  age: (value) => age.value = value,
+  phone: (value) => phone.value = value,
+  address: (value) => address.value = value,
+  city: (value) => city.value = value,
+  zip: (value) => zip.value = value,
+  id: (value) => id.value = value,
+}
+const toLocalStorage = (data) => Object.entries(data).forEach(key => localStorage.setItem(key[0], key[1]))
+const retrieveFromLocalStorage = (toInputsObj) => {
+  Object.entries(toInputsObj)
+    .forEach(toInput => localStorage.hasOwnProperty(toInput[0]) ?
+      toInput[1](localStorage.getItem(toInput[0])) :
+      toInput[1](''))
+}
+
+window.addEventListener('load', () => retrieveFromLocalStorage(fieldValueKeysRetrievedMethod))
