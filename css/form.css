@@ -105,4 +105,24 @@ input:hover {
 #modal {
   box-shadow: 0 0 18px 4px var(--primary-color);
   border-radius: 10px;
+  background-color: #e8eddf99;
+}
+
+#modal-close-btn {
+  border-radius: 15%;
+  padding: 10px;
+  color: var(--dark-secondary);
+  background-color: var(--light-primary);
+  border: solid 2px var(--primary-color);
+  transition: text-shadow 150ms ease,
+    background-color 150ms ease,
+    color 150ms ease;
+}
+
+
+#modal-close-btn:hover {
+  color: var(--primary-color);
+  text-shadow: #333533 1px 0 10px;
+  background-color: var(--light-secondary);
+
 }

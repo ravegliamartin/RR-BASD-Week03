@@ -11,6 +11,9 @@ const id = document.querySelector('#id')
 const submit = document.querySelector('#submit-btn')
 const allMsg = document.querySelectorAll('.msg')
 const modal = document.querySelector('#modal')
+const modalButton = document.querySelector('#modal-close-btn')
+
+// Regex Declarations
 const alphanumericRegEx = /^[a-z0-9]+$/i
 const numericRegEx = /^\d+$/
 const mailRegEx = /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/
@@ -96,7 +99,8 @@ submit.addEventListener('click', (e) => {
   } else {
     alertString += '\nValidation Unsuccesful!'
   }
-  alert(alertString)
+  // alert(alertString)
+  modal.showModal()
 })
 
 // ############ BONUS ############
@@ -104,16 +108,21 @@ const formTitle = document.querySelector('form h2.form-title')
 fullName.addEventListener('keydown', () => setTimeout(() => formTitle.textContent = `Hola ${fullName.value}`, 0))
 fullName.addEventListener('focus', () => formTitle.textContent = `Hola ${fullName.value}`)
 
-// ############ POST Form Data ############
-const postForm = async () => {
-  const res = await fetch("http://curso-dev-2021.herokuapp.com/newsletter", {
-    body: new FormData(document.querySelector("main.main-form form")),
-    headers: {
-      "Content-Type": "multipart/form-data",
-    },
-    method: "post",
-  })
-  console.log(res)
-  const data = await res.JSON()
-  console.log(data)
+// ############ Fetch Form Data (GET) ############
+const FetchGetURL = new URL('http://curso-dev-2021.herokuapp.com/newsletter')
+
+const getForm = async (keysObj) => {
+  try {
+    Object.entries(keysObj).forEach((key) => FetchGetURL.searchParams.set(key[0], key[1]))
+    const res = await fetch(FetchGetURL)
+    const data = await res.json()
+    modal.textContent = data
+    modal.showModal()
+  } catch (err) {
+    modal.textContent = err
+    modal.showModal()
+  }
 }
+
+// ############ Modal Close Button ############
+modalButton.addEventListener('click', () => modal.close())
