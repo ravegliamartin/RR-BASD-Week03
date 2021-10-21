@@ -59,6 +59,7 @@ input[type="submit"] {
 label {
   width: auto;
   text-align: right;
+  text-transform: capitalize;
   font-size: 14px;
   margin: 0 5px;
 }
@@ -131,7 +132,7 @@ input:hover {
   color: var(--primary-color);
   text-shadow: #333533 1px 0 10px;
   background-color: var(--light-secondary);
-
+  cursor: pointer;
 }
 
 #modal-content {

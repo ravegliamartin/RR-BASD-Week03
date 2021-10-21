@@ -18,6 +18,7 @@ const modalButton = document.querySelector('#modal-close-btn')
 const nameKey = document.querySelector('#name-key')
 const mailKey = document.querySelector('#mail-key')
 const subscriptionExpectedLabel = document.querySelector('#subs-expected-label')
+
 // Aux Variables
 let fieldValueKeys = {}
 let nameMailKeys = ['name', 'email']
@@ -94,27 +95,22 @@ id.addEventListener('focus', elFocusManipulation)
 submit.addEventListener('click', (e) => {
   e.preventDefault()
   let allValidationsOk = true
-  // let alertString = ''
   let obj = {}
   allMsg.forEach(el => {
     el.previousElementSibling.children[1].dispatchEvent(new Event('blur'))
     const label = el.previousElementSibling.children[0].textContent.replace(':', '')
     const input = el.previousElementSibling.children[1].value
-    // alertString += `${label} ${input}${el.textContent === 'Correct Input' ?'':` | ${el.textContent}`}\n`
     obj[label] = `${input}${el.textContent === 'Correct Input' ?'':` | ${el.textContent}`}`
     allValidationsOk = allValidationsOk && el.textContent === 'Correct Input'
   })
   if (allValidationsOk) {
-    // alertString += '\nValidation Succesful!'
     fieldValueKeysGenerator()
     getForm(fieldValueKeys)
   } else {
-    // alertString += '\nValidation Unsuccesful!'
     liGenerator(obj, modalContent)
     modalUnsuccessStyle('JS Validation Unsuccessful!')
     modal.showModal()
   }
-  // alert(alertString)
 })
 
 // ############ BONUS Week05 ############
@@ -157,22 +153,52 @@ const fieldValueKeysGenerator = () => {
   }
 }
 
-const getForm = async (keysObj) => {
+// ######## getForm solved with Async Await ########
+
+// const getForm = async (keysObj) => {
+//   const FetchGetURL = new URL('http://curso-dev-2021.herokuapp.com/newsletter')
+//   try {
+//     Object.entries(keysObj).forEach((key) => FetchGetURL.searchParams.set(key[0], key[1]))
+//     const res = await fetch(FetchGetURL)
+//     if (res.status > 399 && res.status < 600) throw new Error(await res.text())
+//     const data = await res.json()
+//     liGenerator(data, modalContent)
+//     modalSuccessStyle('Subscription Successful!')
+//     modal.showModal()
+//     toLocalStorage(data)
+//   } catch (err) {
+//     liGenerator(err.toString(), modalContent)
+//     modalUnsuccessStyle('Subscription Unsuccessful!')
+//     modal.showModal()
+//   }
+// }
+
+const getForm = (keysObj) => {
   const FetchGetURL = new URL('http://curso-dev-2021.herokuapp.com/newsletter')
-  try {
-    Object.entries(keysObj).forEach((key) => FetchGetURL.searchParams.set(key[0], key[1]))
-    const res = await fetch(FetchGetURL)
-    if (res.status > 399 && res.status < 600) throw new Error(await res.text())
-    const data = await res.json()
-    liGenerator(data, modalContent)
-    modalSuccessStyle('Suscription Successful!')
-    modal.showModal()
-    toLocalStorage(data)
-  } catch (err) {
-    liGenerator(err.toString(), modalContent)
-    modalUnsuccessStyle('Suscription Unsuccessful!')
-    modal.showModal()
-  }
+  Object.entries(keysObj).forEach((key) => FetchGetURL.searchParams.set(key[0], key[1]))
+  fetch(FetchGetURL)
+    .then((res) => {
+      if (res.status !== 200) {
+        return res.text().then((err) => {
+          throw new Error(err)
+        })
+      }
+      return res.json()
+    })
+    .then((data) => {
+      liGenerator(data, modalContent)
+      modalSuccessStyle('Subscription Successful!')
+      modal.showModal()
+      toLocalStorage(data)
+    })
+    .catch(errorHandler)
+}
+
+const errorHandler = (err) => {
+  console.log(err)
+  liGenerator(err.toString(), modalContent)
+  modalUnsuccessStyle('Subscription Unsuccessful!')
+  modal.showModal()
 }
 
 // ############ Modal Manipulation ############
@@ -220,8 +246,6 @@ const modalUnsuccessStyle = (labelContent) => {
 const fieldValueKeysRetrievedMethod = {
   name: (value) => fullName.value = value,
   email: (value) => mail.value = value,
-  // fullName: (value)=> fullName.value=value,
-  // mail: (value)=> mail.value=value,
   pass: (value) => pass.value = value,
   repeatPass: (value) => repeatPass.value = value,
   age: (value) => age.value = value,
@@ -231,6 +255,7 @@ const fieldValueKeysRetrievedMethod = {
   zip: (value) => zip.value = value,
   id: (value) => id.value = value,
 }
+
 const toLocalStorage = (data) => Object.entries(data).forEach(key => localStorage.setItem(key[0], key[1]))
 const retrieveFromLocalStorage = (toInputsObj) => {
   Object.entries(toInputsObj)
@@ -240,3 +265,4 @@ const retrieveFromLocalStorage = (toInputsObj) => {
 }
 
 window.addEventListener('load', () => retrieveFromLocalStorage(fieldValueKeysRetrievedMethod))
+window.addEventListener('load', () => formTitle.textContent = `Hola ${fullName.value}`)
