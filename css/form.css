@@ -101,3 +101,8 @@ input:hover {
 .succeed-border {
   border: 1px solid green;
 }
+
+#modal {
+  box-shadow: 0 0 18px 4px var(--primary-color);
+  border-radius: 10px;
+}

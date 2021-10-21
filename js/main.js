@@ -10,7 +10,7 @@ const zip = document.querySelector('#zip')
 const id = document.querySelector('#id')
 const submit = document.querySelector('#submit-btn')
 const allMsg = document.querySelectorAll('.msg')
-
+const modal = document.querySelector('#modal')
 const alphanumericRegEx = /^[a-z0-9]+$/i
 const numericRegEx = /^\d+$/
 const mailRegEx = /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/
@@ -92,6 +92,7 @@ submit.addEventListener('click', (e) => {
   })
   if (allValidationsOk) {
     alertString += '\nValidation Succesful!'
+    postForm()
   } else {
     alertString += '\nValidation Unsuccesful!'
   }
@@ -102,3 +103,17 @@ submit.addEventListener('click', (e) => {
 const formTitle = document.querySelector('form h2.form-title')
 fullName.addEventListener('keydown', () => setTimeout(() => formTitle.textContent = `Hola ${fullName.value}`, 0))
 fullName.addEventListener('focus', () => formTitle.textContent = `Hola ${fullName.value}`)
+
+// ############ POST Form Data ############
+const postForm = async () => {
+  const res = await fetch("http://curso-dev-2021.herokuapp.com/newsletter", {
+    body: new FormData(document.querySelector("main.main-form form")),
+    headers: {
+      "Content-Type": "multipart/form-data",
+    },
+    method: "post",
+  })
+  console.log(res)
+  const data = await res.JSON()
+  console.log(data)
+}
