@@ -1,3 +1,4 @@
+// Elements Selectors
 const fullName = document.querySelector('#fname')
 const mail = document.querySelector('#mail')
 const pass = document.querySelector('#pass')
@@ -12,6 +13,9 @@ const submit = document.querySelector('#submit-btn')
 const allMsg = document.querySelectorAll('.msg')
 const modal = document.querySelector('#modal')
 const modalButton = document.querySelector('#modal-close-btn')
+
+// Aux Variables
+let fieldValueKeys = {}
 
 // Regex Declarations
 const alphanumericRegEx = /^[a-z0-9]+$/i
@@ -100,7 +104,8 @@ submit.addEventListener('click', (e) => {
     alertString += '\nValidation Unsuccesful!'
   }
   // alert(alertString)
-  modal.showModal()
+  fieldValueKeysGenerator()
+  // modal.showModal()
 })
 
 // ############ BONUS ############
@@ -110,7 +115,22 @@ fullName.addEventListener('focus', () => formTitle.textContent = `Hola ${fullNam
 
 // ############ Fetch Form Data (GET) ############
 const FetchGetURL = new URL('http://curso-dev-2021.herokuapp.com/newsletter')
-
+const fieldValueKeysGenerator = () => {
+  fieldValueKeys = {
+    name: fullName.value,
+    email: mail.value,
+    // fullName: fullName.value,
+    // mail: mail.value,
+    pass: pass.value,
+    repeatPass: repeatPass.value,
+    age: age.value,
+    phone: phone.value,
+    address: address.value,
+    city: city.value,
+    zip: zip.value,
+    id: id.value,
+  }
+}
 const getForm = async (keysObj) => {
   try {
     Object.entries(keysObj).forEach((key) => FetchGetURL.searchParams.set(key[0], key[1]))
