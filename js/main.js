@@ -12,6 +12,7 @@ const id = document.querySelector('#id')
 const submit = document.querySelector('#submit-btn')
 const allMsg = document.querySelectorAll('.msg')
 const modal = document.querySelector('#modal')
+const modalLabel = document.querySelector('#modal-label')
 const modalContent = document.querySelector('#modal-content')
 const modalButton = document.querySelector('#modal-close-btn')
 
@@ -91,21 +92,27 @@ submit.addEventListener('click', (e) => {
   e.preventDefault()
   let allValidationsOk = true
   let alertString = ''
+  let obj = {}
   allMsg.forEach(el => {
     el.previousElementSibling.children[1].dispatchEvent(new Event('blur'))
     const label = el.previousElementSibling.children[0].textContent
     const input = el.previousElementSibling.children[1].value
-    alertString += `${label} ${input}${el.textContent === 'Correct Input' ?'':` | ${el.textContent}`}\n`
+    // alertString += `${label} ${input}${el.textContent === 'Correct Input' ?'':` | ${el.textContent}`}\n`
+    obj[label.replace(':', '')] = `${input}${el.textContent === 'Correct Input' ?'':` | ${el.textContent}`}`
     allValidationsOk = allValidationsOk && el.textContent === 'Correct Input'
   })
   if (allValidationsOk) {
     alertString += '\nValidation Succesful!'
+    fieldValueKeysGenerator()
+    getForm(fieldValueKeys)
   } else {
     alertString += '\nValidation Unsuccesful!'
+    liGenerator(obj, modalContent)
+    modalUnsuccessStyle('JS Validation Unsuccessful!')
+    modal.showModal()
   }
-  fieldValueKeysGenerator()
-  console.log(fieldValueKeys)
-  getForm(fieldValueKeys)
+  // alert(alertString)
+
 })
 
 // ############ BONUS ############
@@ -119,7 +126,7 @@ const fieldValueKeysGenerator = () => {
   fieldValueKeys = {
     name: fullName.value || ' ',
     email: mail.value || ' ',
-    fullName: fullName.value || ' ',
+    // fullName: fullName.value || ' ',
     // mail: mail.value || ' ',
     pass: pass.value || ' ',
     repeatPass: repeatPass.value || ' ',
@@ -131,6 +138,7 @@ const fieldValueKeysGenerator = () => {
     id: id.value || ' ',
   }
 }
+
 const getForm = async (keysObj) => {
   try {
     Object.entries(keysObj).forEach((key) => FetchGetURL.searchParams.set(key[0], key[1]))
@@ -138,15 +146,11 @@ const getForm = async (keysObj) => {
     if (res.status > 399 && res.status < 600) throw new Error(await res.text())
     const data = await res.json()
     liGenerator(data, modalContent)
-    console.log(data)
-    console.log(modalContent)
-    modal.classList.add('succeed-border')
-    modal.classList.remove('warning-border')
+    modalSuccessStyle('Suscription Successful!')
     modal.showModal()
   } catch (err) {
     liGenerator(err.toString(), modalContent)
-    modal.classList.add('warning-border')
-    modal.classList.remove('succeed-border')
+    modalUnsuccessStyle('Suscription Unsuccessful!')
     modal.showModal()
   }
 }
@@ -172,4 +176,22 @@ const liGenerator = (textContent, parentEl) => {
   } else {
     throw new Error('textContent should be either an object or a string.')
   }
+}
+
+const modalSuccessStyle = (labelContent) => {
+  modalLabel.textContent = labelContent
+  modalLabel.style.borderBottomColor = 'green'
+  modalLabel.classList.add('succeed')
+  modalLabel.classList.remove('warning')
+  modal.classList.add('succeed-border')
+  modal.classList.remove('warning-border')
+}
+
+const modalUnsuccessStyle = (labelContent) => {
+  modalLabel.textContent = labelContent
+  modalLabel.style.borderBottomColor = 'red'
+  modalLabel.classList.add('warning')
+  modalLabel.classList.remove('succeed')
+  modal.classList.add('warning-border')
+  modal.classList.remove('succeed-border')
 }
