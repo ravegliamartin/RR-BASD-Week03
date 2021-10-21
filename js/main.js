@@ -112,7 +112,6 @@ submit.addEventListener('click', (e) => {
     modal.showModal()
   }
   // alert(alertString)
-
 })
 
 // ############ BONUS ############
@@ -196,7 +195,6 @@ const modalUnsuccessStyle = (labelContent) => {
   modal.classList.add('warning-border')
   modal.classList.remove('succeed-border')
 }
-
 
 // ############ LocalStorage Manipulation ############
 const fieldValueKeysRetrievedMethod = {
