@@ -12,6 +12,7 @@ const id = document.querySelector('#id')
 const submit = document.querySelector('#submit-btn')
 const allMsg = document.querySelectorAll('.msg')
 const modal = document.querySelector('#modal')
+const modalContent = document.querySelector('#modal-content')
 const modalButton = document.querySelector('#modal-close-btn')
 
 // Aux Variables
@@ -99,13 +100,12 @@ submit.addEventListener('click', (e) => {
   })
   if (allValidationsOk) {
     alertString += '\nValidation Succesful!'
-    postForm()
   } else {
     alertString += '\nValidation Unsuccesful!'
   }
-  // alert(alertString)
   fieldValueKeysGenerator()
-  // modal.showModal()
+  console.log(fieldValueKeys)
+  getForm(fieldValueKeys)
 })
 
 // ############ BONUS ############
@@ -117,32 +117,59 @@ fullName.addEventListener('focus', () => formTitle.textContent = `Hola ${fullNam
 const FetchGetURL = new URL('http://curso-dev-2021.herokuapp.com/newsletter')
 const fieldValueKeysGenerator = () => {
   fieldValueKeys = {
-    name: fullName.value,
-    email: mail.value,
-    // fullName: fullName.value,
-    // mail: mail.value,
-    pass: pass.value,
-    repeatPass: repeatPass.value,
-    age: age.value,
-    phone: phone.value,
-    address: address.value,
-    city: city.value,
-    zip: zip.value,
-    id: id.value,
+    name: fullName.value || ' ',
+    email: mail.value || ' ',
+    fullName: fullName.value || ' ',
+    // mail: mail.value || ' ',
+    pass: pass.value || ' ',
+    repeatPass: repeatPass.value || ' ',
+    age: age.value || ' ',
+    phone: phone.value || ' ',
+    address: address.value || ' ',
+    city: city.value || ' ',
+    zip: zip.value || ' ',
+    id: id.value || ' ',
   }
 }
 const getForm = async (keysObj) => {
   try {
     Object.entries(keysObj).forEach((key) => FetchGetURL.searchParams.set(key[0], key[1]))
     const res = await fetch(FetchGetURL)
+    if (res.status > 399 && res.status < 600) throw new Error(await res.text())
     const data = await res.json()
-    modal.textContent = data
+    liGenerator(data, modalContent)
+    console.log(data)
+    console.log(modalContent)
+    modal.classList.add('succeed-border')
+    modal.classList.remove('warning-border')
     modal.showModal()
   } catch (err) {
-    modal.textContent = err
+    liGenerator(err.toString(), modalContent)
+    modal.classList.add('warning-border')
+    modal.classList.remove('succeed-border')
     modal.showModal()
   }
 }
 
-// ############ Modal Close Button ############
+// ############ Modal Manipulation ############
 modalButton.addEventListener('click', () => modal.close())
+modal.style.borderWidth = '2px'
+
+const liGenerator = (textContent, parentEl) => {
+  while (parentEl.firstChild) {
+    parentEl.removeChild(parentEl.firstChild)
+  }
+  if (typeof textContent === 'string') {
+    const li = document.createElement('li')
+    li.textContent = textContent
+    parentEl.appendChild(li)
+  } else if (typeof textContent === 'object') {
+    Object.entries(textContent).forEach(key => {
+      const li = document.createElement('li')
+      li.textContent = `${key[0]}: ${key[1]}`
+      parentEl.appendChild(li)
+    })
+  } else {
+    throw new Error('textContent should be either an object or a string.')
+  }
+}

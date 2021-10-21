@@ -103,14 +103,21 @@ input:hover {
 }
 
 #modal {
+  width: fit-content;
+  /* padding: 10px; */
+  max-width: 80%;
+  min-width: 200px;
   box-shadow: 0 0 18px 4px var(--primary-color);
   border-radius: 10px;
-  background-color: #e8eddf99;
+  background-color: #e8eddfCC;
 }
 
 #modal-close-btn {
+  display: block;
   border-radius: 15%;
   padding: 10px;
+  margin: auto;
+  margin-top: 10px;
   color: var(--dark-secondary);
   background-color: var(--light-primary);
   border: solid 2px var(--primary-color);
@@ -125,4 +132,13 @@ input:hover {
   text-shadow: #333533 1px 0 10px;
   background-color: var(--light-secondary);
 
+}
+
+#modal-content {
+  margin: auto;
+  width: fit-content;
+}
+
+#modal-content li {
+  margin-bottom: 10px;
 }
