@@ -15,9 +15,12 @@ const modal = document.querySelector('#modal')
 const modalLabel = document.querySelector('#modal-label')
 const modalContent = document.querySelector('#modal-content')
 const modalButton = document.querySelector('#modal-close-btn')
-
+const nameKey = document.querySelector('#name-key')
+const mailKey = document.querySelector('#mail-key')
+const subscriptionExpectedLabel = document.querySelector('#subs-expected-label')
 // Aux Variables
 let fieldValueKeys = {}
+let nameMailKeys = ['name', 'email']
 
 // Regex Declarations
 const alphanumericRegEx = /^[a-z0-9]+$/i
@@ -114,19 +117,35 @@ submit.addEventListener('click', (e) => {
   // alert(alertString)
 })
 
-// ############ BONUS ############
+// ############ BONUS Week05 ############
 const formTitle = document.querySelector('form h2.form-title')
 fullName.addEventListener('keydown', () => setTimeout(() => formTitle.textContent = `Hola ${fullName.value}`, 0))
 fullName.addEventListener('focus', () => formTitle.textContent = `Hola ${fullName.value}`)
 
+// ############ Decide Successful/Unsuccessfull Request ############
+const subscriptionExpectedState = () => {
+  if (nameKey.checked && mailKey.checked) {
+    subscriptionExpectedLabel.textContent = 'Subscription should be Successful'
+    subscriptionExpectedLabel.classList.add('succeed')
+    subscriptionExpectedLabel.classList.remove('warning')
+  } else {
+    subscriptionExpectedLabel.textContent = 'Subscription should be Unsuccessful'
+    subscriptionExpectedLabel.classList.remove('succeed')
+    subscriptionExpectedLabel.classList.add('warning')
+  }
+}
+
+nameKey.addEventListener('click', () => nameKey.checked ? nameMailKeys[0] = 'name' : nameMailKeys[0] = 'fullName')
+nameKey.addEventListener('click', subscriptionExpectedState)
+mailKey.addEventListener('click', () => mailKey.checked ? nameMailKeys[1] = 'email' : nameMailKeys[1] = 'mail')
+mailKey.addEventListener('click', subscriptionExpectedState)
+window.addEventListener('load', subscriptionExpectedState)
+
 // ############ Fetch Form Data (GET) ############
-const FetchGetURL = new URL('http://curso-dev-2021.herokuapp.com/newsletter')
 const fieldValueKeysGenerator = () => {
   fieldValueKeys = {
-    name: fullName.value || ' ',
-    email: mail.value || ' ',
-    // fullName: fullName.value || ' ',
-    // mail: mail.value || ' ',
+    [nameMailKeys[0]]: fullName.value || ' ',
+    [nameMailKeys[1]]: mail.value || ' ',
     pass: pass.value || ' ',
     repeatPass: repeatPass.value || ' ',
     age: age.value || ' ',
@@ -139,6 +158,7 @@ const fieldValueKeysGenerator = () => {
 }
 
 const getForm = async (keysObj) => {
+  const FetchGetURL = new URL('http://curso-dev-2021.herokuapp.com/newsletter')
   try {
     Object.entries(keysObj).forEach((key) => FetchGetURL.searchParams.set(key[0], key[1]))
     const res = await fetch(FetchGetURL)
