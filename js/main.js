@@ -17,6 +17,7 @@ const modalContent = document.querySelector('#modal-content')
 const modalButton = document.querySelector('#modal-close-btn')
 const nameKey = document.querySelector('#name-key')
 const mailKey = document.querySelector('#mail-key')
+const subscriptionExpectedContainer = document.querySelector('.subs-expected-state')
 const subscriptionExpectedLabel = document.querySelector('#subs-expected-label')
 
 // Aux Variables
@@ -119,6 +120,7 @@ fullName.addEventListener('keydown', () => setTimeout(() => formTitle.textConten
 fullName.addEventListener('focus', () => formTitle.textContent = `Hola ${fullName.value}`)
 
 // ############ Decide Successful/Unsuccessfull Request ############
+subscriptionExpectedContainer.title = 'With these checkboxes you can willingly provoke a valid or invalid request to the server, by actually changing the name and mail key sent in the query params.'
 const subscriptionExpectedState = () => {
   if (nameKey.checked && mailKey.checked) {
     subscriptionExpectedLabel.textContent = 'Subscription should be Successful'
