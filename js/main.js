@@ -154,7 +154,7 @@ const fieldValueKeysGenerator = () => {
 }
 
 // ######## getForm solved with Async Await ########
-
+//
 // const getForm = async (keysObj) => {
 //   const FetchGetURL = new URL('http://curso-dev-2021.herokuapp.com/newsletter')
 //   try {
@@ -174,7 +174,7 @@ const fieldValueKeysGenerator = () => {
 // }
 
 const getForm = (keysObj) => {
-  const FetchGetURL = new URL('http://curso-dev-2021.herokuapp.com/newsletter')
+  const FetchGetURL = new URL('https://curso-dev-2021.herokuapp.com/newsletter')
   Object.entries(keysObj).forEach((key) => FetchGetURL.searchParams.set(key[0], key[1]))
   fetch(FetchGetURL)
     .then((res) => {
