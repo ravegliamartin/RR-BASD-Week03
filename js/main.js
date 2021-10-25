@@ -36,7 +36,7 @@ const passValidator = (passContent) => alphanumericRegEx.test(passContent) && pa
 const repeatPassValidator = (repeatPassContent) => pass.value === repeatPassContent
 const ageValidator = (ageContent) => numericRegEx.test(ageContent) && Number(ageContent) > 17
 const phoneValidator = (phoneContent) => numericRegEx.test(phoneContent) && phoneContent.length > 6
-const addressValidator = (addressContent) => /^[a-z0-9áéíóúñ]+ [a-z0-9áéíóúñ]+$/i.test(addressContent) && /\d/.test(addressContent) && /[a-z]/i.test(addressContent) && addressContent.length > 4
+const addressValidator = (addressContent) => /^[a-z0-9áéíóúñ]+( +[a-z0-9áéíóúñ]+)+$/i.test(addressContent) && /\d/.test(addressContent) && /[a-z]/i.test(addressContent) && addressContent.length > 4
 const cityValidator = (cityContent) => cityContent.length > 2
 const zipValidator = (zipContent) => zipContent.length > 2
 const idValidator = (IDContent) => IDContent.length === 7 || IDContent.length === 8 && numericRegEx.test(IDContent)
@@ -155,26 +155,12 @@ const fieldValueKeysGenerator = () => {
   }
 }
 
-// ######## getForm solved with Async Await ########
-//
-// const getForm = async (keysObj) => {
-//   const FetchGetURL = new URL('http://curso-dev-2021.herokuapp.com/newsletter')
-//   try {
-//     Object.entries(keysObj).forEach((key) => FetchGetURL.searchParams.set(key[0], key[1]))
-//     const res = await fetch(FetchGetURL)
-//     if (res.status > 399 && res.status < 600) throw new Error(await res.text())
-//     const data = await res.json()
-//     liGenerator(data, modalContent)
-//     modalSuccessStyle('Subscription Successful!')
-//     modal.showModal()
-//     toLocalStorage(data)
-//   } catch (err) {
-//     liGenerator(err.toString(), modalContent)
-//     modalUnsuccessStyle('Subscription Unsuccessful!')
-//     modal.showModal()
-//   }
-// }
-
+/**
+ * Creates the server URL and populates its query params with the key/value pairs of keysObj.
+ * 
+ * Calls the fetch method and handles the resolve/reject responses
+ * @param {object} keysObj Each key/value pair of the object is going to be appended as a key/value query param of the URL.
+ */
 const getForm = (keysObj) => {
   const FetchGetURL = new URL('https://curso-dev-2021.herokuapp.com/newsletter')
   Object.entries(keysObj).forEach((key) => FetchGetURL.searchParams.set(key[0], key[1]))
@@ -193,20 +179,29 @@ const getForm = (keysObj) => {
       modal.showModal()
       toLocalStorage(data)
     })
-    .catch(errorHandler)
-}
-
-const errorHandler = (err) => {
-  console.log(err)
-  liGenerator(err.toString(), modalContent)
-  modalUnsuccessStyle('Subscription Unsuccessful!')
-  modal.showModal()
+    .catch((err) => {
+      liGenerator(err.toString(), modalContent)
+      modalUnsuccessStyle('Subscription Unsuccessful!')
+      modal.showModal()
+    })
 }
 
 // ############ Modal Manipulation ############
 modalButton.addEventListener('click', () => modal.close())
 modal.style.borderWidth = '2px'
 
+
+/**
+ * Empties parentEl.
+ * 
+ * Creates a li element for each key of textContent or just one if textContent is a string.
+ * 
+ * Populates each li created with the key value of textContent or with the textContent value if it is a string.
+ * 
+ * Appends each li to the parentEl.
+ * @param {object|string} textContent Content of the li elements.
+ * @param {Element} parentEl Parent Element in which the li elements are going to be appended.
+ */
 const liGenerator = (textContent, parentEl) => {
   while (parentEl.firstChild) {
     parentEl.removeChild(parentEl.firstChild)
@@ -258,7 +253,18 @@ const fieldValueKeysRetrievedMethod = {
   id: (value) => id.value = value,
 }
 
+/**
+ * Saves each key/value pair of the data object in Local Storage
+ * @param {object} data Each key/value pair of the object is saved in Local Storage
+ */
 const toLocalStorage = (data) => Object.entries(data).forEach(key => localStorage.setItem(key[0], key[1]))
+
+/**
+ * Looks for a value stored in Local Storage which is named as the key of the object.
+ * 
+ * If it is found, the method set in the object is used to manipulate and load the value stored in Local Storage
+ * @param {object} toInputsObj The value of each key should be a method to manipulate the key stored value in Local Storage
+ */
 const retrieveFromLocalStorage = (toInputsObj) => {
   Object.entries(toInputsObj)
     .forEach(toInput => localStorage.hasOwnProperty(toInput[0]) ?
