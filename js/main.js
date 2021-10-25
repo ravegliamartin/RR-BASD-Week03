@@ -30,13 +30,13 @@ const numericRegEx = /^\d+$/
 const mailRegEx = /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/
 
 // Validations
-const fullNameValidator = (fullNameContent) => /^[a-záéíóúñ]+( +[a-záéíóúñ]+)+$/i.test(fullNameContent) && fullNameContent.length > 6
+const fullNameValidator = (fullNameContent) => /^[a-záéíóúñ]+( +[a-záéíóúñ]+)+$/i.test(fullNameContent) && fullNameContent.replace(/\s+/g, '').length > 5
 const mailValidator = (mailContent) => mailRegEx.test(mailContent)
 const passValidator = (passContent) => alphanumericRegEx.test(passContent) && passContent.length > 7
 const repeatPassValidator = (repeatPassContent) => pass.value === repeatPassContent
 const ageValidator = (ageContent) => numericRegEx.test(ageContent) && Number(ageContent) > 17
 const phoneValidator = (phoneContent) => numericRegEx.test(phoneContent) && phoneContent.length > 6
-const addressValidator = (addressContent) => /^[a-z0-9áéíóúñ]+( +[a-z0-9áéíóúñ]+)+$/i.test(addressContent) && /\d/.test(addressContent) && /[a-z]/i.test(addressContent) && addressContent.length > 4
+const addressValidator = (addressContent) => /^[a-z0-9áéíóúñ]+( +[a-z0-9áéíóúñ]+)+$/i.test(addressContent) && /\d/.test(addressContent) && /[a-z]/i.test(addressContent) && addressContent.replace(/\s+/g, '').length > 4
 const cityValidator = (cityContent) => cityContent.length > 2
 const zipValidator = (zipContent) => zipContent.length > 2
 const idValidator = (IDContent) => IDContent.length === 7 || IDContent.length === 8 && numericRegEx.test(IDContent)
